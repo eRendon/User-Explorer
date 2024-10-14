@@ -1,15 +1,16 @@
-<div class="search-container">
+<div class="container mx-auto p-4">
   <h1 class="text-2xl font-bold mb-4">Buscar usuarios de GitHub</h1>
 
-  <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="mb-6">
-    <div class="input-group mb-3">
-      <input
+  <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="container mx-auto p-4">
+    <div class="flex space-x-2 mb-4">
+      <app-input
+        [icon]="faSearch"
         type="text"
         formControlName="searchTerm"
-        class="form-input"
+        class="flex-grow"
         placeholder="Escribe el nombre del usuario..."
       />
-      <button type="submit" class="btn-primary" [disabled]="searchForm.invalid">Buscar</button>
+      <app-button variant="outline" type="submit" class="btn-primary" [disabled]="searchForm.invalid">Buscar</app-button>
     </div>
 
     <!-- Validaciones -->
@@ -37,15 +38,7 @@
   @if(users.length > 0) {
     <div>
       <h2 class="text-xl font-bold mb-2">Resultados</h2>
-      <ul>
-        @for (user of users; track user.id) {
-          <li >
-            <a [routerLink]="['/profile', user.login]" class="text-blue-600 hover:underline">
-              {{ user.login }} (ID: {{ user.id }})
-            </a>
-          </li>
-        }
-      </ul>
+      <app-user-list [users]="users"></app-user-list>
     </div>
   }
 

@@ -1,0 +1,33 @@
+<div class="flex flex-col min-h-screen">
+  <header class="bg-primary text-primary-foreground shadow-md">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <a routerLink="/"  class="text-2xl font-bold">
+      GitHub User Search
+      </a>
+      <nav>
+        <ul class="flex space-x-4">
+          <li>
+            <a routerLink="/" class="hover:underline">
+            Home
+            </a>
+          </li>
+          <li>
+            <a routerLink="/about" class="hover:underline">
+            About
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-grow container mx-auto px-4 py-8">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="bg-secondary text-secondary-foreground border-t">
+    <div class="container mx-auto px-4 py-4 text-center">
+      <p>&copy; 2023 GitHub User Search. All rights reserved.</p>
+    </div>
+  </footer>
+</div>

@@ -11,7 +11,11 @@ import {
   Validators
 } from '@angular/forms'
 import { ErrorMessageComponent } from '../error-message/error-message.component'
-import { UserDAO } from '../../../core/services/dao/user.dao'
+import { InputComponent } from '../input/input.component'
+import { ButtonComponent } from '../button/button.component'
+import { UserListComponent } from '../../user-list/user-list.component'
+import { IUser } from '../../../interfaces/IUser'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-search',
@@ -20,17 +24,17 @@ import { UserDAO } from '../../../core/services/dao/user.dao'
     RouterLink,
     FormsModule,
     ErrorMessageComponent,
-    ReactiveFormsModule
-  ],
-  providers: [
-    UserRepository,
-    UserDAO
+    ReactiveFormsModule,
+    InputComponent,
+    ButtonComponent,
+    UserListComponent,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
 export class SearchComponent {
-  private userDAO = inject(UserDAO);
+  faSearch = faSearch
+  private userRepository = inject(UserRepository);
 
   // Formulario reactivo
   searchForm = new FormGroup({
@@ -41,7 +45,7 @@ export class SearchComponent {
     ]),
   });
 
-  users: any[] = [];
+  users: IUser[] = [];
   errorMessage: string | null = null;
 
   // Validación personalizada para evitar "gcpglobal"
@@ -55,15 +59,16 @@ export class SearchComponent {
   // Método para buscar usuarios
   onSearch() {
     if (this.searchForm.valid) {
-      const query = this.searchForm.get('searchTerm')?.value || '';
-      this.userDAO.searchUsers(query).subscribe(
-        (response) => {
-          this.users = response.items.slice(0, 10); // Mostrar solo los primeros 10 usuarios
+      const query = this.searchForm.get('searchTerm')?.value || ''
+      this.userRepository.searchUsers(query).subscribe({
+        next: users => {
+          this.users = users
+          this.userRepository.setAllUsers(users)
         },
-        (error) => {
-          this.errorMessage = 'Error al obtener los usuarios';
+        error: () => {
+          this.errorMessage = 'Error al obtener los usuarios'
         }
-      );
+      })
     }
   }
 }

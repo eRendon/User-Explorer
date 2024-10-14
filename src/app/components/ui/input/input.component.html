@@ -1,0 +1,13 @@
+<div class="input-container">
+  @if (icon) {
+    <app-icon class="input-icon" [icon]="icon"></app-icon>
+  }
+  <input
+    [ngClass]="getClasses()"
+    [type]="type"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    (input)="onInput($event)"
+    (blur)="onTouched()"
+  />
+</div>

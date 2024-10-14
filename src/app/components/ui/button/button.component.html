@@ -1,0 +1,13 @@
+<div>
+  <button
+    [ngClass]="getClasses()"
+    [attr.disabled]="disabled ? true : null"
+    (click)="handleClick($event)"
+    #buttonRef
+  >
+    <ng-content></ng-content>
+    @if (icon) {
+      <app-icon [icon]="icon"></app-icon>
+    }
+  </button>
+</div>
