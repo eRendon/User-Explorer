@@ -1,0 +1,57 @@
+<div class="search-container">
+  <h1 class="text-2xl font-bold mb-4">Buscar usuarios de GitHub</h1>
+
+  <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="mb-6">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        formControlName="searchTerm"
+        class="form-input"
+        placeholder="Escribe el nombre del usuario..."
+      />
+      <button type="submit" class="btn-primary" [disabled]="searchForm.invalid">Buscar</button>
+    </div>
+
+    <!-- Validaciones -->
+    @if(searchForm.get('searchTerm')?.invalid && searchForm.get('searchTerm')?.touched) {
+      <div class="text-red-600">
+        @if(searchForm.get('searchTerm')?.errors?.['required']) {
+          <div>
+            Este campo es obligatorio.
+          </div>
+        }
+        @if(searchForm.get('searchTerm')?.errors?.['minlength']) {
+          <div>
+            Debe tener al menos 4 caracteres.
+          </div>
+        }
+        @if(searchForm.get('searchTerm')?.errors?.['forbiddenTerm']) {
+          <div>
+            No se permite la búsqueda de "gcpglobal".
+          </div>
+        }
+      </div>
+    }
+  </form>
+
+  @if(users.length > 0) {
+    <div>
+      <h2 class="text-xl font-bold mb-2">Resultados</h2>
+      <ul>
+        @for (user of users; track user.id) {
+          <li >
+            <a [routerLink]="['/profile', user.login]" class="text-blue-600 hover:underline">
+              {{ user.login }} (ID: {{ user.id }})
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+
+  @if(errorMessage) {
+    <div>
+      <app-error-message [message]="errorMessage"></app-error-message>
+    </div>
+  }
+</div>
