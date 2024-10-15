@@ -19,7 +19,7 @@ describe('UserDAO', () => {
   });
 
   afterEach(() => {
-    httpMock.verify(); // Verifica que no hay peticiones pendientes
+    httpMock.verify()
   });
 
   it('should be created', () => {
@@ -36,12 +36,12 @@ describe('UserDAO', () => {
       };
 
       service.searchUsers('test').subscribe(users => {
-        expect(users).toEqual(mockResponse); // Verifica que el resultado es el esperado
+        expect(users).toEqual(mockResponse)
       });
 
-      const req = httpMock.expectOne('https://api.github.com/search/users?q=test'); // Espera una solicitud
-      expect(req.request.method).toBe('GET'); // Verifica que el método es GET
-      req.flush(mockResponse); // Responde con los datos simulados
+      const req = httpMock.expectOne('https://api.github.com/search/users?q=test');
+      expect(req.request.method).toBe('GET')
+      req.flush(mockResponse)
     });
   });
 
@@ -57,12 +57,12 @@ describe('UserDAO', () => {
       };
 
       service.getUserProfile('user1').subscribe(profile => {
-        expect(profile).toEqual(mockUserProfile); // Verifica que el perfil es el esperado
+        expect(profile).toEqual(mockUserProfile)
       });
 
-      const req = httpMock.expectOne('https://api.github.com/users/user1'); // Espera una solicitud
-      expect(req.request.method).toBe('GET'); // Verifica que el método es GET
-      req.flush(mockUserProfile); // Responde con los datos simulados
+      const req = httpMock.expectOne('https://api.github.com/users/user1')
+      expect(req.request.method).toBe('GET')
+      req.flush(mockUserProfile)
     });
   });
 });

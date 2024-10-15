@@ -33,7 +33,7 @@ describe('DefaultLayoutComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            params: of({}) // Simula los parámetros de la ruta como un observable
+            params: of({})
           }
         }
       ]

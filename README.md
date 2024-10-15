@@ -49,6 +49,18 @@ Esta aplicación permite buscar y mostrar información sobre usuarios de GitHub 
    
 5. Abre tu navegador y ve a http://localhost:4200.
 
+## Deploy
+
+Este proyecto ha sido deployado en vercel con una integración contínua que permite este servicio de la nube, no se crearon ci ni cd por cuestiones de planes del servicio
+```
+https://user-explorer-cyan.vercel.app/
+```
+
+## Coverage
+Se alcanzó un coverage de un 66% en el proyecto
+```
+66.85% Statements 117/1754.34% Branches 1/2354.9% Functions 28/5165.83% Lines 106/161
+```
 ## Conclusión
 
 <p style="text-align: justify;">
@@ -65,6 +77,9 @@ Esta aplicación permite buscar y mostrar información sobre usuarios de GitHub 
 </p>
 <p>
 - Me encontré con el reto para crear gráficas dinámicas, ya que hace algún tiempo no utilizaba este tipo de gráficos. Por tanto, fue bastante retador renderizar las gráficas correctamente luego de pasar los datos para estas. 
+</p>
+<p>
+- Para los test de los componentes, me apoyé con las inteligencias artificiales, en este caso, usé ChatGPT, ya que Codiumate provee muy poca información.
 </p>
 
 ```

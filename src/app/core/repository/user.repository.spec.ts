@@ -16,7 +16,7 @@ describe('UserRepository', () => {
     TestBed.configureTestingModule({
       providers: [
         UserRepository,
-        { provide: UserDAO, useValue: userDAOMock } // Proporciona el espía
+        { provide: UserDAO, useValue: userDAOMock }
       ]
     });
     TestBed.inject(UserDAO)
@@ -77,11 +77,11 @@ describe('UserRepository', () => {
       ]
     };
 
-    userDAOMock.searchUsers.and.returnValue(of(mockResponse)); // Simula la respuesta del DAO
+    userDAOMock.searchUsers.and.returnValue(of(mockResponse));
 
     userRepository.searchUsers('test query').subscribe((users) => {
-      expect(users.length).toBe(2); // Verifica que retorne los usuarios
-      expect(users[0].login).toBe('eRendon'); // Verifica el nombre del primer usuario
+      expect(users.length).toBe(2);
+      expect(users[0].login).toBe('eRendon');
       done();
     });
   });
@@ -93,10 +93,10 @@ describe('UserRepository', () => {
       incomplete_results: false
     };
 
-    userDAOMock.searchUsers.and.returnValue(of(mockResponse)); // Simula la respuesta vacía
+    userDAOMock.searchUsers.and.returnValue(of(mockResponse));
 
     userRepository.searchUsers('test query').subscribe((users) => {
-      expect(users.length).toBe(0); // Verifica que retorne un array vacío
+      expect(users.length).toBe(0);
       done();
     });
   });
@@ -124,10 +124,10 @@ describe('UserRepository', () => {
       score: 1.0,
     }
 
-    userDAOMock.getUserProfile.and.returnValue(of(mockUserProfile)); // Simula la respuesta del DAO
+    userDAOMock.getUserProfile.and.returnValue(of(mockUserProfile));
 
     userRepository.getUserProfile<IUser>('eRendon').subscribe((user) => {
-      expect(user).toEqual(mockUserProfile); // Verifica que retorne el perfil del usuario
+      expect(user).toEqual(mockUserProfile)
       done();
     });
   });
@@ -155,8 +155,8 @@ describe('UserRepository', () => {
       score: 1.0
     }]
 
-    userRepository.setAllUsers(mockUsers); // Establece los usuarios
+    userRepository.setAllUsers(mockUsers)
 
-    expect(userRepository.getAllUsers()).toEqual(mockUsers); // Verifica que se hayan establecido correctamente
+    expect(userRepository.getAllUsers()).toEqual(mockUsers)
   });
 });
