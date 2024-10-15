@@ -1,27 +1,73 @@
 # UserExplorer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
+Este proyecto fue creado con [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
 
-## Development server
+## Descripción
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Esta aplicación permite buscar y mostrar información sobre usuarios de GitHub utilizando su API pública. Los usuarios pueden ingresar un nombre de usuario y ver un listado de los primeros 10 resultados, con enlaces a perfiles individuales que muestran más detalles sobre cada usuario.
 
-## Code scaffolding
+## Características
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Búsqueda de Usuarios**: Captura el nombre de usuario y obtiene información desde la API de GitHub.
+- **Listado de Resultados**: Muestra los primeros 10 usuarios con su nombre de usuario y ID.
+- **Navegación a Perfiles**: Cada perfil de usuario es un enlace que navega a una ruta específica.
+- **Detalles del Usuario**: Incluye información del usuario, como la imagen de perfil y otros datos relevantes.
+- **Validación de Búsqueda**: Verifica que el texto de búsqueda tenga al menos 4 caracteres y no permita la búsqueda de la palabra "gcpglobal".
+- **Gráficos**: Integra una librería de gráficos para mostrar un gráfico de barras con el número de seguidores de los primeros 10 usuarios.
+- **Manejo de Errores**: Un componente para mostrar mensajes de error en toda la aplicación.
+- **Métodos Observables y Promises**: Implementa un servicio que utiliza ambos métodos para obtener datos.
+- **Guardias**: Restringe el acceso a perfiles de usuarios con un 'score' menor a 30.0.
 
-## Build
+## Tecnologías Utilizadas
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Angular 18**: Framework para construir aplicaciones web.
+- **TypeScript**: Lenguaje utilizado para el desarrollo del proyecto.
+- **Tailwind CSS**: Framework de CSS para estilos rápidos y responsivos.
+- **Font Awesome**: Para el manejo de iconos.
+- **Librería de Gráficos Chart Js**: Para visualizar datos de seguidores.
 
-## Running unit tests
+## Instalación
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Clona el repositorio:
 
-## Running end-to-end tests
+   ```bash
+   git clone https://github.com/eRendon/User-Explorer.git
+   ```
+2. Navegar al directorio del proyecto:
+    ```bash
+    cd User-Explorer 
+    ```
+3. Instala las dependencias:
+    ```bash
+    npm install
+    ```
+   
+4. Inicia la aplicación:
+    ```bash
+    ng serve
+   ```
+   
+5. Abre tu navegador y ve a http://localhost:4200.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Conclusión
 
-## Further help
+<p style="text-align: justify;">
+- Decidí crear el patrón repositorio para tener un mejor orden en la estructura de este, agregando DAO para separar la lógica que se necesita a la hora de modificar datos del modelo que retorna la API.
+</p>
+<p>
+- Implementé el patrón de diseño atómico para reutilizar componentes simples y evitar un diseño duplicado de estos en todo el proyecto.
+</p>
+<p>
+- Creé un sistema de layouts simple para dividir el proyecto en caso tal de que este fuese a crecer en el tiempo y hacerlo más modular.
+</p>
+<p>
+- Creé algunas animaciones simples para los modales y la transición de rutas.
+</p>
+<p>
+- Me encontré con el reto para crear gráficas dinámicas, ya que hace algún tiempo no utilizaba este tipo de gráficos. Por tanto, fue bastante retador renderizar las gráficas correctamente luego de pasar los datos para estas. 
+</p>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```
+Nombre: Edwin Alexander Rendon Cadavid
+Residencia: Robledo, Medellín, Antioquia
+```
