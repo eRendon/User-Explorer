@@ -30,7 +30,6 @@ export class ProfileComponent implements OnInit {
     const login = this.activatedRoute.snapshot.params['login']
     this.userRepository.getUserProfile<IProfile>(login).subscribe({
       next: (response) => {
-        console.log('respusta', response);
         this.profile = response;
       },
       error: (err) => {

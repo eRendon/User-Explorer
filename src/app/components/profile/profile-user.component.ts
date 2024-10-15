@@ -12,5 +12,5 @@ import { NgOptimizedImage } from '@angular/common'
   styleUrl: './profile-user.component.scss'
 })
 export class ProfileUserComponent {
-  @Input() profile!: IProfile
+  @Input() profile?: IProfile
 }

@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
-import { IHTTPResponse } from '../../interfaces/IHTTPResponse'
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,7 @@ export class UserDAO {
   }
 
   // Método para obtener detalles de un usuario por login
-  getUserProfile(login: string): Observable<any> {
-    return this.http.get(`${this.userApiUrl}${login}`);
+  getUserProfile<T>(login: string): Observable<T> {
+    return this.http.get<T>(`${this.userApiUrl}${login}`);
   }
 }
