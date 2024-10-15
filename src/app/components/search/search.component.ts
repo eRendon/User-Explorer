@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core'
-import { UserRepository } from '../../../core/services/user.repository'
+import { UserRepository } from '../../core/repository/user.repository'
 import { RouterLink } from '@angular/router'
 import {
   AbstractControl,
@@ -10,12 +10,13 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms'
-import { ErrorMessageComponent } from '../error-message/error-message.component'
-import { InputComponent } from '../input/input.component'
-import { ButtonComponent } from '../button/button.component'
-import { UserListComponent } from '../../user-list/user-list.component'
-import { IUser } from '../../../interfaces/IUser'
+import { ErrorMessageComponent } from '../ui/error-message/error-message.component'
+import { InputComponent } from '../ui/input/input.component'
+import { ButtonComponent } from '../ui/button/button.component'
+import { UserListComponent } from '../user-list/user-list.component'
+import { IUser } from '../../interfaces/IUser'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { LoadingService } from '../../core/services/loading-service/loading.service'
 
 @Component({
   selector: 'app-search',
@@ -34,21 +35,21 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 })
 export class SearchComponent {
   faSearch = faSearch
-  private userRepository = inject(UserRepository);
+  private readonly userRepository = inject(UserRepository);
+  private readonly loadingService = inject(LoadingService)
 
   // Formulario reactivo
   searchForm = new FormGroup({
     searchTerm: new FormControl<string>('', [
       Validators.required,
       Validators.minLength(4),
-      this.forbiddenTermValidator('gcpglobal'), // Cambia a la función correcta
+      this.forbiddenTermValidator('gcpglobal')
     ]),
   });
 
   users: IUser[] = [];
   errorMessage: string | null = null;
 
-  // Validación personalizada para evitar "gcpglobal"
   forbiddenTermValidator(term: string): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const forbidden = control.value?.toLowerCase() === term.toLowerCase();
@@ -56,9 +57,9 @@ export class SearchComponent {
     };
   }
 
-  // Método para buscar usuarios
   onSearch() {
     if (this.searchForm.valid) {
+      this.loadingService.setIsLoading(true)
       const query = this.searchForm.get('searchTerm')?.value || ''
       this.userRepository.searchUsers(query).subscribe({
         next: users => {
@@ -67,8 +68,13 @@ export class SearchComponent {
         },
         error: () => {
           this.errorMessage = 'Error al obtener los usuarios'
+        },
+        complete: () => {
+          this.loadingService.setIsLoading(false)
         }
       })
+    } else {
+      this.searchForm.markAllAsTouched()
     }
   }
 }

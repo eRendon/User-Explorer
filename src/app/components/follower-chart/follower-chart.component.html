@@ -1,3 +1,6 @@
 <div>
-  <canvas id="followersChart"></canvas>
+  <app-chart [labels]="labels"
+             [chartType]="'doughnut'"
+             [labelDataSet]="profile?.login!"
+             [backgroundColor]="backgroundColor"></app-chart>
 </div>

@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core'
 import { map, Observable } from 'rxjs'
-import { UserDAO } from './dao/user.dao'
+import { UserDAO } from '../dao/user.dao'
 import { IUser } from '../../interfaces/IUser'
 import { IHTTPResponse } from '../../interfaces/IHTTPResponse'
 

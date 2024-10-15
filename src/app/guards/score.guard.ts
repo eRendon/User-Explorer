@@ -1,5 +1,5 @@
 import { CanActivateFn, Router } from '@angular/router'
-import { UserRepository } from '../core/services/user.repository'
+import { UserRepository } from '../core/repository/user.repository'
 import { inject } from '@angular/core'
 
 export const ScoreGuard: CanActivateFn = (route, state) => {

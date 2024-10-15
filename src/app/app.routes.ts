@@ -6,4 +6,8 @@ export const routes: Routes = [
     path: '', title: 'home', component: DefaultLayoutComponent,
     loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
   },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];

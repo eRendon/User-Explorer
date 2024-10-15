@@ -12,8 +12,9 @@
             </a>
           </li>
           <li>
-            <a routerLink="/about" class="hover:underline">
-            About
+            <a href="https://github.com/eRendon" target="_blank" class="hover:underline">
+              <app-icon [icon]="gitHubIcon"></app-icon>
+              eRendon
             </a>
           </li>
         </ul>
@@ -21,13 +22,14 @@
     </div>
   </header>
 
-  <main class="flex-grow container mx-auto px-4 py-8">
-    <router-outlet></router-outlet>
+  <main [@routerTransition]="o.isActivated ? o.activatedRoute : ''" class="flex-grow container mx-auto px-4 py-8">
+    <router-outlet #o="outlet"></router-outlet>
   </main>
 
   <footer class="bg-secondary text-secondary-foreground border-t">
     <div class="container mx-auto px-4 py-4 text-center">
-      <p>&copy; 2023 GitHub User Search. All rights reserved.</p>
+      <a href="https://github.com/eRendon" target="_blank">&copy; 2024 Edwin Rendon. All rights reserved.</a>
     </div>
   </footer>
+  <app-loader></app-loader>
 </div>

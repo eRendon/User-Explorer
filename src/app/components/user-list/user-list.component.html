@@ -2,9 +2,14 @@
   @for (user of users; track  user.id) {
     <div
          (click)="navigateToUser(user.login)"
-         class="block p-4 border rounded hover:bg-gray-100 cursor-pointer">
+         class="block p-4 border rounded-md hover:bg-gray-100 cursor-pointer fade-in-up">
       <h2 class="text-lg font-semibold">{{ user.login }}</h2>
       <p class="text-gray-600">ID: {{ user.id }}</p>
+      <p class="text-gray-600">Score: {{ user.score }}</p>
+    </div>
+  } @empty {
+    <div>
+      No se encontraron usuarios
     </div>
   }
 </div>
