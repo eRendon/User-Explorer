@@ -42,6 +42,12 @@
     </div>
   }
 
+  <app-modal [isOpen]="isModalOpen"
+             [error]="errorMessage"
+             (onClose)="onCloseModal()">
+
+  </app-modal>
+
   @if(errorMessage) {
     <div>
       <app-error-message [message]="errorMessage"></app-error-message>

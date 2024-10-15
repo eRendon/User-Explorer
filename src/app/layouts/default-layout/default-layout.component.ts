@@ -5,6 +5,7 @@ import { IconComponent } from '../../components/ui/icon/icon.component'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { GitHubIcon } from '../../components/ui/icon/GitHubIcon'
 import { animate, style, transition, trigger } from '@angular/animations'
+import { ToastComponent } from '../../components/ui/toast/toast.component'
 
 library.add(GitHubIcon)
 
@@ -16,6 +17,7 @@ library.add(GitHubIcon)
     RouterLink,
     LoaderComponent,
     IconComponent,
+    ToastComponent
   ],
   animations: [
     trigger('routerTransition', [

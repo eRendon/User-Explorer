@@ -17,6 +17,7 @@ import { UserListComponent } from '../user-list/user-list.component'
 import { IUser } from '../../interfaces/IUser'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { LoadingService } from '../../core/services/loading-service/loading.service'
+import { ModalComponent } from '../ui/modal/modal.component'
 
 @Component({
   selector: 'app-search',
@@ -29,6 +30,7 @@ import { LoadingService } from '../../core/services/loading-service/loading.serv
     InputComponent,
     ButtonComponent,
     UserListComponent,
+    ModalComponent
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
@@ -37,7 +39,7 @@ export class SearchComponent {
   faSearch = faSearch
   private readonly userRepository = inject(UserRepository);
   private readonly loadingService = inject(LoadingService)
-
+  isModalOpen: boolean = false
   // Formulario reactivo
   searchForm = new FormGroup({
     searchTerm: new FormControl<string>('', [
@@ -48,7 +50,7 @@ export class SearchComponent {
   });
 
   users: IUser[] = [];
-  errorMessage: string | null = null;
+  errorMessage!: string
 
   forbiddenTermValidator(term: string): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
@@ -59,6 +61,7 @@ export class SearchComponent {
 
   onSearch() {
     if (this.searchForm.valid) {
+      this.errorMessage = ''
       this.loadingService.setIsLoading(true)
       const query = this.searchForm.get('searchTerm')?.value || ''
       this.userRepository.searchUsers(query).subscribe({
@@ -67,6 +70,8 @@ export class SearchComponent {
           this.userRepository.setAllUsers(users)
         },
         error: () => {
+          this.loadingService.setIsLoading(false)
+          this.isModalOpen = true
           this.errorMessage = 'Error al obtener los usuarios'
         },
         complete: () => {
@@ -76,5 +81,9 @@ export class SearchComponent {
     } else {
       this.searchForm.markAllAsTouched()
     }
+  }
+
+  onCloseModal(): void {
+    this.isModalOpen = false
   }
 }
